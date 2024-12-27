@@ -1,5 +1,6 @@
 from textwrap import dedent
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.hashers import check_password
 from django.shortcuts import redirect
@@ -8,8 +9,7 @@ from django.views.decorators.http import require_POST
 from django_ratelimit.decorators import ratelimit
 
 from core.models import VerificationCodes, User, TracebackError
-from settings import settings
-from settings.helpers import send_email, ARE_EMAILS_ENABLED
+from core.utils.settings_helper import send_email, ARE_EMAILS_ENABLED
 
 
 def create_account_verify(request, uuid, token):

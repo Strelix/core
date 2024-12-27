@@ -31,7 +31,7 @@ def login_initial_page(request: HttpRequest):
 
     return render(
         request,
-        "pages/auth/login_initial.html",
+        "core/auth/login_initial.html",
         {
             "github_enabled": getattr(settings, "SOCIAL_AUTH_GITHUB_ENABLED", False),
             "google_enabled": getattr(settings, "SOCIAL_AUTH_GOOGLE_OAUTH2_ENABLED", False),
@@ -126,7 +126,7 @@ class MagicLinkRequestView(View):
         magic_link, plain_token = create_magic_link(user, service="login")
         self.send_magic_link_email(request, user, str(magic_link.uuid), plain_token)
         self.send_message(request, should_redirect=False)
-        return render(request, "pages/auth/magic_link_waiting.html", {"email": request.POST.get("email")})
+        return render(request, "core/auth/magic_link_waiting.html", {"email": request.POST.get("email")})
 
     def send_message(
         self, request: HttpRequest, message: str = "", success: bool = True, should_redirect: bool = True
@@ -167,7 +167,7 @@ class MagicLinkWaitingView(View):
             return redirect("dashboard")
         if not request.htmx:
             return redirect("core:auth:login")
-        return render(request, "pages/auth/magic_link_waiting.html", {"email": request.POST.get("email")})
+        return render(request, "core/auth/magic_link_waiting.html", {"email": request.POST.get("email")})
 
 
 class MagicLinkVerifyView(View):
@@ -187,7 +187,7 @@ class MagicLinkVerifyView(View):
         # user.backend = "backend.auth_backends.EmailInsteadOfUsernameBackend"
         # login(request, magic_link.user)
 
-        return render(request, "pages/auth/magic_link_verify.html", {"uuid": uuid, "token": token})
+        return render(request, "core/auth/magic_link_verify.html", {"uuid": uuid, "token": token})
 
         #
         # messages.success(request, "Successfully logged in")
@@ -212,7 +212,7 @@ class MagicLinkVerifyDecline(View):
 
             AuditLog.objects.create(user=user, action="magic link declined")
             messages.success(request, "Successfully declined the magic link verification request.")
-            return render(request, "pages/auth/_magic_link_partial.html", {"declined": True})
+            return render(request, "core/auth/_magic_link_partial.html", {"declined": True})
 
 
 class MagicLinkVerifyAccept(View):
@@ -236,7 +236,7 @@ class MagicLinkVerifyAccept(View):
             login(request, magic_link.user)
 
             messages.success(request, "Successfully accepted the magic link verification request.")
-            return render(request, "pages/auth/_magic_link_partial.html", {"accepted": True})
+            return render(request, "core/auth/_magic_link_partial.html", {"accepted": True})
 
 
 def is_magiclink_valid(magic_link: VerificationCodes | None, token: str) -> tuple[bool, str]:
@@ -271,4 +271,4 @@ def logout_view(request):
 def forgot_password_page(request: HttpRequest):
     if request.user.is_authenticated:
         return redirect("dashboard")
-    return render(request, "pages/auth/forgot_password.html")
+    return render(request, "core/auth/forgot_password.html")

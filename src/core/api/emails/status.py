@@ -13,6 +13,7 @@ from core.utils.settings_helper import EMAIL_CLIENT
 from core.models import EmailSendStatus
 from core.types.htmx import HtmxHttpRequest
 
+
 @require_POST
 @htmx_only("emails:dashboard")
 @feature_flag_check("areUserEmailsAllowed", status=True, api=True, htmx=True)

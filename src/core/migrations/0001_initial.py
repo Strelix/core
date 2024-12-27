@@ -33,9 +33,7 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(editable=False, max_length=100, unique=True)),
                 (
                     "description",
-                    models.TextField(
-                        blank=True, editable=False, max_length=500, null=True
-                    ),
+                    models.TextField(blank=True, editable=False, max_length=500, null=True),
                 ),
                 ("value", models.BooleanField(default=False)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
@@ -60,9 +58,7 @@ class Migration(migrations.Migration):
                 ("password", models.CharField(max_length=128, verbose_name="password")),
                 (
                     "last_login",
-                    models.DateTimeField(
-                        blank=True, null=True, verbose_name="last login"
-                    ),
+                    models.DateTimeField(blank=True, null=True, verbose_name="last login"),
                 ),
                 (
                     "is_superuser",
@@ -75,35 +71,25 @@ class Migration(migrations.Migration):
                 (
                     "username",
                     models.CharField(
-                        error_messages={
-                            "unique": "A user with that username already exists."
-                        },
+                        error_messages={"unique": "A user with that username already exists."},
                         help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
                         max_length=150,
                         unique=True,
-                        validators=[
-                            django.contrib.auth.validators.UnicodeUsernameValidator()
-                        ],
+                        validators=[django.contrib.auth.validators.UnicodeUsernameValidator()],
                         verbose_name="username",
                     ),
                 ),
                 (
                     "first_name",
-                    models.CharField(
-                        blank=True, max_length=150, verbose_name="first name"
-                    ),
+                    models.CharField(blank=True, max_length=150, verbose_name="first name"),
                 ),
                 (
                     "last_name",
-                    models.CharField(
-                        blank=True, max_length=150, verbose_name="last name"
-                    ),
+                    models.CharField(blank=True, max_length=150, verbose_name="last name"),
                 ),
                 (
                     "email",
-                    models.EmailField(
-                        blank=True, max_length=254, verbose_name="email address"
-                    ),
+                    models.EmailField(blank=True, max_length=254, verbose_name="email address"),
                 ),
                 (
                     "is_staff",
@@ -123,9 +109,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "date_joined",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, verbose_name="date joined"
-                    ),
+                    models.DateTimeField(default=django.utils.timezone.now, verbose_name="date joined"),
                 ),
                 (
                     "stripe_customer_id",
@@ -307,9 +291,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "members",
-                    models.ManyToManyField(
-                        related_name="teams_joined", to=settings.AUTH_USER_MODEL
-                    ),
+                    models.ManyToManyField(related_name="teams_joined", to=settings.AUTH_USER_MODEL),
                 ),
             ],
         ),
@@ -376,9 +358,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "last_used",
-                    models.DateTimeField(
-                        blank=True, null=True, verbose_name="Last Used"
-                    ),
+                    models.DateTimeField(blank=True, null=True, verbose_name="Last Used"),
                 ),
                 (
                     "scopes",
@@ -669,9 +649,7 @@ class Migration(migrations.Migration):
                 ("recipient", models.TextField()),
                 (
                     "aws_message_id",
-                    models.CharField(
-                        blank=True, editable=False, max_length=100, null=True
-                    ),
+                    models.CharField(blank=True, editable=False, max_length=100, null=True),
                 ),
                 (
                     "status",
@@ -726,12 +704,8 @@ class Migration(migrations.Migration):
                 "constraints": [
                     models.CheckConstraint(
                         condition=models.Q(
-                            models.Q(
-                                ("organization__isnull", False), ("user__isnull", True)
-                            ),
-                            models.Q(
-                                ("organization__isnull", True), ("user__isnull", False)
-                            ),
+                            models.Q(("organization__isnull", False), ("user__isnull", True)),
+                            models.Q(("organization__isnull", True), ("user__isnull", False)),
                             _connector="OR",
                         ),
                         name="core_emailsendstatus_check_user_or_organization",

@@ -99,9 +99,7 @@ class Migration(migrations.Migration):
                 ("uuid", models.UUIDField(default=uuid.uuid4, unique=True)),
                 (
                     "stripe_session_id",
-                    models.CharField(
-                        blank=True, max_length=100, null=True, unique=True
-                    ),
+                    models.CharField(blank=True, max_length=100, null=True, unique=True),
                 ),
             ],
             options={
@@ -141,9 +139,7 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(max_length=50, unique=True)),
                 (
                     "price_per_month",
-                    models.DecimalField(
-                        blank=True, decimal_places=2, max_digits=10, null=True
-                    ),
+                    models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True),
                 ),
                 (
                     "description",
@@ -178,9 +174,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "custom_subscription_price_per_month",
-                    models.DecimalField(
-                        blank=True, decimal_places=2, max_digits=10, null=True
-                    ),
+                    models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True),
                 ),
                 ("start_date", models.DateTimeField(auto_now_add=True)),
                 ("end_date", models.DateTimeField(blank=True, null=True)),

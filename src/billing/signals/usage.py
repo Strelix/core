@@ -38,4 +38,3 @@ def usage_occurred(sender, instance: BillingUsage, created, **kwargs):
         instance.set_processed(datetime.fromtimestamp(meter_event.created))
 
     return
-

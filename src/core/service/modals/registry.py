@@ -20,10 +20,7 @@ class Modal(ABC):
         if not cls.modal_name:
             raise ValueError(f"Modal class {cls.__name__} must define a `modal_name`.")
         if cls.modal_name in modal_registry:
-            logging.info(
-                f"Modal {cls.modal_name} is being overridden by {cls.__name__}.",
-                UserWarning
-            )
+            logging.info(f"Modal {cls.modal_name} is being overridden by {cls.__name__}.", UserWarning)
         modal_registry[cls.modal_name] = cls
 
     def get_context(self, request) -> dict:
@@ -34,7 +31,7 @@ class Modal(ABC):
             # Ensure the base has a distinct `get_context` method to avoid infinite recursion
             if base is Modal:
                 continue
-            if 'get_context' in base.__dict__:
+            if "get_context" in base.__dict__:
                 # logging.debug(f"Gathering context from: {base.__name__}")
                 base_context = base.get_context(self, request)
                 context.update(base_context)
@@ -66,6 +63,7 @@ class Modal(ABC):
 
 def get_modal(name):
     return modal_registry.get(name)
+
 
 # EXAMPLE MODAL
 

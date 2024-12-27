@@ -10,6 +10,7 @@ from core.utils.settings_helper import send_email
 from core.models import Notification, Organization, TeamInvitation, User
 from core.types.htmx import HtmxHttpRequest
 
+
 def delete_notification(user: User, code: TeamInvitation):
     notification = Notification.objects.filter(
         user=user,

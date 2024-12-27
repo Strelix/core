@@ -47,8 +47,10 @@ if getattr(settings, "BILLING_ENABLED", False):
 
     admin.site.register([PlanFeature, PlanFeatureGroup, SubscriptionPlan, UserSubscription])
 
+
 class EmailSendStatusAdmin(admin.ModelAdmin):
     readonly_fields = ["aws_message_id"]
+
 
 admin.site.register(EmailSendStatus, EmailSendStatusAdmin)
 

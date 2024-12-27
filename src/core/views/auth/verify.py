@@ -70,7 +70,9 @@ def resend_verification_code(request):
         return redirect("core:auth:login create_account")
     VerificationCodes.objects.filter(user=user, service="create_account").delete()
     magic_link = create_magic_link(user, "create_account")
-    magic_link_url = settings.SITE_URL + reverse("core:auth:login create_account verify", kwargs={"uuid": magic_link.uuid, "token": token_plain})
+    magic_link_url = settings.SITE_URL + reverse(
+        "core:auth:login create_account verify", kwargs={"uuid": magic_link.uuid, "token": token_plain}
+    )
 
     send_email(
         destination=email,

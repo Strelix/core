@@ -17,15 +17,15 @@ url(
     {"document_root": settings.STATICFILES_DIRS[0]},
 )
 urlpatterns = [
-  # path("tz_detect/", include("tz_detect.urls")),
-  # path("pricing", pricing, name="pricing"),
-  path("dashboard/settings/", include("core.views.settings.urls")),
-  path("dashboard/teams/", include("core.views.teams.urls")),
-  path("dashboard/emails/", include("core.views.emails.urls")),
-  path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico")),
-  path("login/external/", include("social_django.urls", namespace="social")),
-  path("auth/", include("core.views.auth.urls")),
-  path("api/", include("core.api.urls")),
+    # path("tz_detect/", include("tz_detect.urls")),
+    # path("pricing", pricing, name="pricing"),
+    path("dashboard/settings/", include("core.views.settings.urls")),
+    path("dashboard/teams/", include("core.views.teams.urls")),
+    path("dashboard/emails/", include("core.views.emails.urls")),
+    path("favicon.ico", RedirectView.as_view(url=settings.STATIC_URL + "favicon.ico")),
+    path("login/external/", include("social_django.urls", namespace="social")),
+    path("auth/", include("core.views.auth.urls")),
+    path("api/", include("core.api.urls")),
 ] + static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
 
 app_name = "core"

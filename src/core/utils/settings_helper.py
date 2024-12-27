@@ -276,7 +276,7 @@ def send_templated_bulk_email(
 
 
 print(sys.argv)
-if not any(arg in sys.argv[1:] for arg in ["test", "migrate", "makemigrations"]) and sys.argv != ['makemigrations.py']:
+if not any(arg in sys.argv[1:] for arg in ["test", "migrate", "makemigrations"]) and sys.argv != ["makemigrations.py"]:
     if not get_var("SITE_URL"):
         raise ValueError("SITE_URL is required")
 

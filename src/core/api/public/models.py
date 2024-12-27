@@ -30,7 +30,7 @@ class APIAuthToken(OwnerBase, ExpiresBase):
     class Meta:
         verbose_name = "API Key"
         verbose_name_plural = "API Keys"
-        app_label = 'core'
+        app_label = "core"
 
     def __str__(self):
         return self.name

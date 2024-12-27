@@ -24,6 +24,7 @@ from core.utils.settings_helper import send_email, ARE_EMAILS_ENABLED
 from core.models import LoginLog, User, VerificationCodes, AuditLog
 from core.views.auth.verify import create_magic_link
 
+
 @require_GET
 @not_authenticated
 def login_initial_page(request: HttpRequest):
@@ -35,8 +36,8 @@ def login_initial_page(request: HttpRequest):
         {
             "github_enabled": getattr(settings, "SOCIAL_AUTH_GITHUB_ENABLED", False),
             "google_enabled": getattr(settings, "SOCIAL_AUTH_GOOGLE_OAUTH2_ENABLED", False),
-            "next": redirect_url
-        }
+            "next": redirect_url,
+        },
     )
 
 
@@ -143,7 +144,9 @@ class MagicLinkRequestView(View):
             return True
 
     def send_magic_link_email(self, request: HttpRequest, user: User, uuid: str, plain_token: str) -> None:
-        magic_link_url = request.build_absolute_uri(reverse("core:auth:login magic_link verify", kwargs={"uuid": uuid, "token": plain_token}))
+        magic_link_url = request.build_absolute_uri(
+            reverse("core:auth:login magic_link verify", kwargs={"uuid": uuid, "token": plain_token})
+        )
 
         send_email(
             destination=user.email,

@@ -2,6 +2,7 @@ from django.db.models import QuerySet
 
 from core.api.public import APIAuthToken
 from core.models import UserSettings
+
 # from core.service.defaults.get import get_account_defaults
 from core.types.requests import WebRequest
 

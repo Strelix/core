@@ -13,7 +13,7 @@ urlpatterns = [
     path("maintenance/", include("core.api.maintenance.urls")),
     path("landing_page/", include("core.api.landing_page.urls")),
     path("public/", include("core.api.public.urls")),
-#     path("", include("backend_utils.finance.api.urls")),
+    #     path("", include("backend_utils.finance.api.urls")),
 ]
 
 app_name = "api"

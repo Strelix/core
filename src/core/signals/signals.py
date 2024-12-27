@@ -14,6 +14,7 @@ from django.urls import reverse
 
 from core.models import UserSettings, User, FeatureFlags, VerificationCodes
 
+
 @receiver(pre_save, sender=UserSettings)
 def delete_old_profile_picture(sender, instance, **kwargs):
     if not instance.pk:
@@ -34,6 +35,7 @@ def set_profile_picture_to_none(sender, instance, **kwargs):
     # Check if the file exists in the storage
     if instance.profile_picture and default_storage.exists(instance.profile_picture.name):
         instance.profile_picture.delete(save=False)
+
 
 @receiver(post_save, sender=User)
 def user_account_create_make_usersettings(sender, instance, created, **kwargs):

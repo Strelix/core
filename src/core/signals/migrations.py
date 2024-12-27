@@ -31,6 +31,7 @@ def update_feature_flags(**kwargs):
             FeatureFlags.objects.create(name=feature_flag.name, value=feature_flag.default, description=feature_flag.description)
             logging.info(f"Added feature flag: {feature_flag.name}")
 
+
 #
 # @receiver(post_migrate)
 # def update_quota_limits(**kwargs):

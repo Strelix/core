@@ -15,6 +15,7 @@ from django.utils import timezone
 from django.utils.crypto import get_random_string
 from storages.backends.s3 import S3Storage
 
+
 def _public_storage():
     return storages["public_media"]
 

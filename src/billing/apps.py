@@ -3,6 +3,7 @@ import importlib
 from django.apps import AppConfig
 from django.conf import settings
 
+
 class BillingConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "billing"

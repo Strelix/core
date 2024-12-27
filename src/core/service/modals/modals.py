@@ -33,7 +33,8 @@ class PermissionModalContext:
 
 
 class GenerateAPIKeyModal(Modal, PermissionModalContext):
-    modal_name = 'generate_api_key'
+    modal_name = "generate_api_key"
+
 
 class PassTeamIdContext:
     def get_context(self, request: WebRequest) -> dict:
@@ -41,20 +42,23 @@ class PassTeamIdContext:
             "team_id": request.GET.get("team"),
         }
 
+
 class TeamCreateUserModal(Modal, PermissionModalContext, PassTeamIdContext):
-    modal_name = 'team_create_user'
+    modal_name = "team_create_user"
 
     def get(self, request: WebRequest):
         context = self.get_context(request)
         context["team_id"] = request.GET.get("team")
         return self.Response(request, context)
 
+
 class CreateTeamModal(Modal):
-    modal_name = 'create_team'
+    modal_name = "create_team"
+
 
 class EditTeamMemberPermissions(Modal, PermissionModalContext):
-    modal_name = 'edit_team_member_permissions'
-    template_name = 'modals/edit_team_member_permissions.html'
+    modal_name = "edit_team_member_permissions"
+    template_name = "modals/edit_team_member_permissions.html"
 
     def get(self, request: WebRequest):
         context = self.get_context(request)
@@ -77,8 +81,9 @@ class EditTeamMemberPermissions(Modal, PermissionModalContext):
 
         return self.Response(request, context)
 
+
 class ChangeProfilePictureModal(Modal):
-    modal_name = 'change_profile_picture'
+    modal_name = "change_profile_picture"
 
     def get(self, request: WebRequest):
         context = self.get_context(request)
@@ -90,8 +95,9 @@ class ChangeProfilePictureModal(Modal):
 
         return self.Response(request, context)
 
+
 class LeaveTeamModal(Modal):
-    modal_name = 'leave_team'
+    modal_name = "leave_team"
 
     def get(self, request: WebRequest):
         context = self.get_context(request)
@@ -103,4 +109,4 @@ class LeaveTeamModal(Modal):
 
 
 class InvoiceUserToTeamModal(Modal, PassTeamIdContext):
-    modal_name = 'invite_user_to_team'
+    modal_name = "invite_user_to_team"

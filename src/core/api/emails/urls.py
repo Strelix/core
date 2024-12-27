@@ -3,6 +3,7 @@ from __future__ import annotations
 from django.urls import path
 
 from . import fetch, status
+
 # from . import send
 
 urlpatterns = [

@@ -48,9 +48,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name="stripecheckoutsession",
             name="features",
-            field=models.ManyToManyField(
-                related_name="checkout_sessions", to="billing.planfeature"
-            ),
+            field=models.ManyToManyField(related_name="checkout_sessions", to="billing.planfeature"),
         ),
         migrations.AddField(
             model_name="stripecheckoutsession",

@@ -17,8 +17,8 @@ jobs:
       BRANCH: "debug"
       DEBUG: "true"
       DATABASE_TYPE: "sqlite3"
-      SITE_URL: "http://myfinances.example.com"
-      SITE_NAME: "myfinances"
+      SITE_URL: "http://test.strelix.org"
+      SITE_NAME: "strelix core"
     steps:
       - name: Clone repo
         uses: actions/checkout@v4.1.6

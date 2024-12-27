@@ -76,7 +76,7 @@
 #          DEBUG: "true"
 #          DATABASE_TYPE: "sqlite3"
 #          SITE_URL: "http://myfinances.example.com"
-#          SITE_NAME: "myfinances"
+#          SITE_NAME: "strelix core"
 #        run: |
 #          source .venv/bin/activate
 #          python3 manage.py collectstatic --no-input

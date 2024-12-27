@@ -162,7 +162,7 @@ exclude = [
 ]
 
 [tool.django-stubs]
-django_settings_module = "settings.settings"
+django_settings_module = "core.settings"
 
 [[tool.mypy.overrides]]
 module = [

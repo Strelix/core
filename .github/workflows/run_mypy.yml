@@ -20,6 +20,7 @@ jobs:
       SITE_URL: "http://test.strelix.org"
       SITE_NAME: "strelix core"
       DJANGO_SETTINGS_MODULE: "core.settings"
+      PYTHONPATH: ./src
     steps:
       - name: Clone repo
         uses: actions/checkout@v4.1.6

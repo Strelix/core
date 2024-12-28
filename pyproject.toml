@@ -1,0 +1,193 @@
+[tool.poetry]
+name = "Strelix-Core"
+version = "0.0.0"
+description = "github.com/Strelix/core"
+authors = ["TreyWW"]
+readme = "README.md"
+package-mode = true
+
+packages = [
+    { include = "core", from = "src" },
+    { include = "billing", from = "src" },
+]
+
+[project]
+name = "strelix-core"
+version = "0.0.0"
+description = "Strelix Core"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "TreyWW", email = "trey@strelix.org" },
+]
+
+keywords = ["identity", "authentication", "strelix", "myfinances"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+
+[project.urls]
+GitHub = "https://github.com/Strelix/core"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4.0"
+setuptools = "^70.1.1"
+bleach = "6.1.0"  # used for HTML sanitation
+tblib = "^3.0.0"  # Exceptions and Tracebacks
+django = "^5.0.7"
+coverage = "^7.4.4"
+djangorestframework = "^3.14.0"
+typos = "^1.20.3"
+mkdocs = "^1.5.3"
+mkdocs-material = "^9.5.15"
+mkdocs-git-committers-plugin-2 = "^2.3.0"
+django-storages = "1.14.2" # AWS S3
+boto3 = "1.34.76"  # AWS
+pillow = "10.3.0" # Images
+stripe = "^10.8.0" # Payments
+django-environ = "0.11.2" # ENV Vars
+django-ratelimit = "4.1.0" # Rate Limiting
+django-login-required-middleware = "0.9.0" # todo: remove soon and use custom
+social-auth-app-django = "^5.4.2" # social logins | todo: may be able to remove?
+django-silk = "^5.3.2" # request logging and performance viewing
+django-htmx = "1.17.3" # HTMX Attributes on request
+
+[tool.poetry.group.dev.dependencies]
+twine = "^6.0.1"  # Package upload for PyPi
+build = "^1.2.2.post1"  # Package building
+black = "^24.3.0"  # Python Formatting
+djlint = "^1.34.1"  # HTML/Django Formatting
+pre-commit = "^3.7.0"  # PreCommit Hooks
+bump-my-version = "^0.19.3"  # Version Bumping
+
+[tool.poetry.group.mypy]
+optional = false
+
+[tool.poetry.group.mypy.dependencies]
+mypy = "1.7.1"
+django-stubs = { version = "4.2.7" }
+django-stubs-ext = { version = "4.2.7" }
+djangorestframework-stubs = { extras = ["compatible-mypy"], version = "^3.14.5" }#
+boto3-stubs = { extras = [
+    "sesv2",
+    "events",
+    "scheduler",
+    "dynamodb",
+    "iam",
+    "stepfunctions",
+], version = "^1.34.76" }
+
+djangorestframework = "^3.14.0"
+django-tz-detect = "^0.5.0"
+pre-commit = "^3.7.0"
+pulumi-aws = "^6.29.0"
+types-python-dateutil = "^2.9.0.20240906"
+types-markdown = "^3.7.0.20240822"
+types-pygments = "^2.18.0.20240506"
+types-cffi = "^1.16.0.20240331"
+types-protobuf = "^5.27.0.20240907"
+types-psycopg2 = "^2.9.21.20240819"
+types-pycurl = "^7.45.3.20240421"
+types-six = "^1.16.21.20240513"
+
+[tool.poetry.group.mysql]
+optional = true
+
+[tool.poetry.group.mysql.dependencies]
+mysqlclient = "2.2.0"
+mariadb = "1.1.8"
+
+[tool.poetry.group.postgres]
+optional = true
+
+[tool.poetry.group.postgres.dependencies]
+psycopg2 = "2.9.9"
+
+[tool.djlint]
+profile = "django"
+max_line_length = 110
+
+[tool.black]
+line-length = 140
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+
+"core" = ["templates/**/*", "static/**/*"]
+"billing" = ["templates/**/*", "static/**/*"]
+
+[tool.bumpversion]
+current_version = "0.0.0"
+commit = true
+commit_args = "-s"
+tag = true
+tag_name = "v{new_version}"
+sign_tags = true
+allow_dirty = true
+parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)(\\.(?P<dev>post)\\d+\\.dev\\d+)?"
+serialize = [
+    "{major}.{minor}.{patch}.{dev}{$PR_NUMBER}.dev{distance_to_latest_tag}",
+    "{major}.{minor}.{patch}"
+]
+
+message = "Version updated from {current_version} to {new_version}"
+
+[[tool.bumpversion.files]]
+filename = "src/core/__init__.py"
+
+[[tool.bumpversion.files]]
+filename = "package.json"
+search = '"version": "{current_version}"'
+replace = '"version": "{new_version}"'
+
+[[tool.bumpversion.files]]
+filename = "pyproject.toml"
+search = 'version = "{current_version}"'
+replace = 'version = "{new_version}"'
+
+[tool.mypy]
+plugins = [
+    "mypy_django_plugin.main",
+    "mypy_drf_plugin.main"
+]
+disable_error_code = ["annotation-unchecked"]
+explicit_package_bases = true
+incremental = false
+exclude = [
+    "venv",
+    ".venv",
+    "env",
+    "ENV",
+    "ENV_DIR",
+    "env.bak",
+    "venv.bak",
+    ".*django-stubs.*"
+]
+
+[tool.django-stubs]
+django_settings_module = "core.settings"
+
+[[tool.mypy.overrides]]
+module = [
+    "django.core.cache.backends.redis",
+    "django_ratelimit.*",
+    "environ",
+    "login_required",
+    "storages.backends.s3",
+    "emails",
+    "step_functions",
+    "django_components",
+    "drf_yasg.*",
+    "core.*",
+    "billing.*"
+]
+ignore_missing_imports = true

@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💸 MyFinances
+    url: https://github.com/TreyWW/MyFinances/
+    about: Want to go to our main application repository? MyFinances!
+  - name: 🔍 View Issues
+    url: https://github.com/Strelix/Core/issues?q=is%3Aissue
+    about: If you have found an issue (or a bug), try searching our issues tab before reporting it.
+  - name: ❓ Need some help
+    url: https://github.com/Strelix/Core/discussions/categories/q-a
+    about: If you have a question or are stuck setting up the project, open a Q&A discussion!
+#  - name: 📖 View our documentation
+#    url: https://docs.strelix.org/?utm_source=github_issue_create
+#    about: Check out our documentation to get started! We have lots of helpful info in there

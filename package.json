@@ -1,0 +1,10 @@
+{
+  "name": "strelix-core",
+  "version": "0.0.0",
+  "main": "static/tailwind.config.js",
+  "style": "static/src/input.css",
+  "dependencies": {
+    "daisyui": "^4.12.22",
+    "tailwindcss": "^3.4.17"
+  }
+}

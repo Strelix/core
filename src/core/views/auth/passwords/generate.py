@@ -15,7 +15,6 @@ from core.models import RandomCode
 from core.types.htmx import HtmxHttpRequest
 
 
-
 def msg_if_valid_email_then_sent(request):
     return messages.success(
         request,

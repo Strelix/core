@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta, date
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.core.exceptions import ValidationError
@@ -12,7 +13,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from core.models import User, PasswordSecret
 from core.models import RandomCode
 from core.types.htmx import HtmxHttpRequest
-from settings import settings
+
 
 
 def msg_if_valid_email_then_sent(request):

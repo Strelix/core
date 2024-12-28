@@ -19,6 +19,7 @@ jobs:
       DATABASE_TYPE: "sqlite3"
       SITE_URL: "http://test.strelix.org"
       SITE_NAME: "strelix core"
+      DJANGO_SETTINGS_MODULE: "core.settings"
     steps:
       - name: Clone repo
         uses: actions/checkout@v4.1.6

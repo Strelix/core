@@ -76,6 +76,11 @@ django-ratelimit = "4.1.0" # Rate Limiting
 django-login-required-middleware = "0.9.0" # todo: remove soon and use custom
 social-auth-app-django = "^5.4.2" # social logins | todo: may be able to remove?
 django-silk = "^5.3.2" # request logging and performance viewing
+django-htmx = "1.17.3" # HTMX Attributes on request
+
+[tool.poetry.group.mypy]
+optional = false
+
 [tool.poetry.group.mypy.dependencies]
 mypy = "1.7.1"
 django-stubs = { version = "4.2.7" }
@@ -165,19 +170,20 @@ exclude = [
 django_settings_module = "core.settings"
 
 [[tool.mypy.overrides]]
+module = ["core.*", "billing.*"]
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
 module = [
     "django.core.cache.backends.redis",
-    "django_ratelimit.core",
-    "django_ratelimit.decorators",
-    "django_ratelimit.exceptions",
-    "django_ratelimit",
+    "django_ratelimit.*",
     "environ",
     "login_required",
+    "storages.backends.s3",
     "emails",
     "step_functions",
     "django_components",
-    "drf_yasg",
-    "drf_yasg.utils",
-    "drf_yasg.views",
+    "drf_yasg.*",
+    "core"
 ]
 ignore_missing_imports = true

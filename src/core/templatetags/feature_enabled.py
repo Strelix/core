@@ -38,7 +38,7 @@ def personal_feature_enabled(user: User, feature: str):
 
 @register.simple_tag
 def has_entitlement(actor: User | Organization, entitlement: str) -> bool:
-    if not settings.BILLING_ENABLED:
+    if not hasattr(settings, "BILLING_ENABLED") or not settings.BILLING_ENABLED:
         return True
 
     from billing.service.entitlements import has_entitlement as _has_entitlement

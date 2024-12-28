@@ -2,7 +2,7 @@ import botocore.client
 from botocore.config import Config
 from botocore.exceptions import NoCredentialsError, PartialCredentialsError
 
-from settings.helpers import get_var
+from core.utils.settings_helper import get_var
 
 import boto3
 import logging

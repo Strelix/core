@@ -55,7 +55,7 @@ SCOPE_DESCRIPTIONS = {
     "account_defaults": {"description": "Modify account defaults", "options": {"write": "Read and write"}},
 }
 
-if settings.BILLING_ENABLED:
+if hasattr(settings, "BILLING_ENABLED") and settings.BILLING_ENABLED:
     SCOPES.add("billing:manage")
     SCOPES_TREE["billing:manage"] = {"billing:manage"}
     SCOPE_DESCRIPTIONS["billing"] = {"description": "Access billing details + stripe", "options": {"manage": "Manage billing"}}

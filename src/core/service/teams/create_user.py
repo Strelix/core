@@ -5,7 +5,7 @@ from django.utils.crypto import get_random_string
 
 from core.models import User, Organization, TeamMemberPermission
 from core.utils.dataclasses import BaseServiceResponse
-from settings.helpers import send_email
+from core.utils.settings_helper import send_email
 
 
 class CreateUserServiceResponse(BaseServiceResponse[User]): ...

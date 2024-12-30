@@ -1,6 +1,6 @@
 {
   "name": "strelix-core",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "static/tailwind.config.js",
   "style": "static/src/input.css",
   "dependencies": {

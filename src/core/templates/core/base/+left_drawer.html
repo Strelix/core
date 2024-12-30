@@ -21,8 +21,7 @@
                 {% with i_url="dashboard" %}
                     <a href="{% url i_url %}"
                        {% if  request.resolver_match.view_name == i_url %}class="active{% endif %}
-                   ">My Dashboard
-                    </a>
+                       ">My Dashboard</a>
                 {% endwith %}
             </li>
             {#        <li>#}

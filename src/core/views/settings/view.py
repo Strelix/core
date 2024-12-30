@@ -1,47 +1,65 @@
+import logging
+
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.shortcuts import render
 
-from core.service.settings.view import (
-    validate_page,
-    account_page_context,
-    api_keys_page_context,
-    account_defaults_context,
-    email_templates_context,
-)
+from core.config import CoreConfig
 from core.types.requests import WebRequest
+from core.models import TracebackError
 
 
 @require_http_methods(["GET"])
 def view_settings_page_endpoint(request: WebRequest, page: str | None = None):
-    if not validate_page(page):
-        messages.error(request, "Invalid settings page")
+    context = {}
+
+    # If no page is provided, default to the 'profile' page
+    if not page:
+        template = "core/settings/pages/profile.html"
+        # Check if 'on_main' query parameter is present to decide layout
+        if not request.GET.get("on_main"):
+            context["page_template"] = template
+            return render(request, "core/settings/main.html", context)
+        return render(request, template, context)
+
+    # If a page is provided, look for its handler
+    handler_path = CoreConfig().SETTINGS_PAGE_CONTEXT_HANDLERS.get(page)
+
+    if not handler_path:
+        logging.error(f"Settings page handler not found for {page}")
+        messages.error(request, "Settings page not found")
         if request.htmx:
-            return render(request, "base/toast.html")
+            return render(request, "core/base/toast.html")
         return redirect("core:settings:dashboard")
 
-    context: dict = {}
+    # Extract the module path and function name from the handler path
+    module_path, func_name = handler_path.rsplit(".", 1)
 
-    match page:
-        case "account":
-            account_page_context(request, context)
-        case "api_keys":
-            api_keys_page_context(request, context)
-        case "account_defaults":
-            account_defaults_context(request, context)
-        case "email_templates":
-            email_templates_context(request, context)
+    try:
+        # Dynamically import the module and get the handler function
+        module = __import__(module_path, fromlist=[func_name])
+        context_function = getattr(module, func_name)
+        context_function(request, context)  # Call the handler function to fill the context
+    except (ImportError, AttributeError) as e:
+        print(e)
+        messages.error(request, f"Settings page handler not implemented for {page}. Please contact the site support.")
+        TracebackError.objects.create(user=request.user, error=f"Settings page handler not implemented for {page}")
+        if request.htmx:
+            return render(request, "core/base/toast.html")
+        return redirect("core:settings:dashboard")
 
-    template = f"pages/settings/pages/{page or 'profile'}.html"
+    # Default template for the provided page
+    template = f"core/settings/pages/{page}.html"
 
-    if not page or not request.GET.get("on_main"):
+    # Check if 'on_main' query parameter is present to decide layout
+    if not request.GET.get("on_main"):
         context["page_template"] = template
-        return render(request, "pages/settings/main.html", context)
+        return render(request, "core/settings/main.html", context)
 
+    # Otherwise, render the page directly
     response = render(request, template, context)
-
     response.no_retarget = True  # type: ignore[attr-defined]
     return response
 

@@ -6,6 +6,12 @@
 <div hx-swap-oob='outerHTML:div[data-layout="icon_dropdown_items"]'>
     {% include "core/base/topbar/+icon_dropdown.html" %}
 </div>
-{% block left_drawer %}{% include "core/base/+left_drawer.html" with swap=True %}{% endblock %}
-{% block breadcrumbs %}{% include "core/base/breadcrumbs.html" with swap=True %}{% endblock %}
-{% block toasts %}{% include "core/base/toasts.html" %}{% endblock %}
+{% block left_drawer %}
+    {% include "core/base/+left_drawer.html" with swap=True %}
+{% endblock %}
+{% block breadcrumbs %}
+    {% include "core/base/breadcrumbs.html" with swap=True %}
+{% endblock %}
+{% block toasts %}
+    {% include "core/base/toasts.html" %}
+{% endblock %}

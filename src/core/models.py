@@ -393,6 +393,33 @@ class PasswordSecret(ExpiresBase):
     secret = models.TextField(max_length=300)
 
 
+class Client(OwnerBase):
+    active = models.BooleanField(default=True)
+    name = models.CharField(max_length=64)
+    phone_number = models.CharField(max_length=100, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    email_verified = models.BooleanField(default=False)
+    company = models.CharField(max_length=100, blank=True, null=True)
+    contact_method = models.CharField(max_length=100, blank=True, null=True)
+    is_representative = models.BooleanField(default=False)
+
+    address = models.TextField(max_length=100, blank=True, null=True)
+    city = models.CharField(max_length=100, blank=True, null=True)
+    country = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    def has_access(self, user: User) -> bool:
+        if not user.is_authenticated:
+            return False
+
+        if user.logged_in_as_team:
+            return self.organization == user.logged_in_as_team
+        else:
+            return self.user == user
+
+
 class Notification(models.Model):
     action_choices = [
         ("normal", "Normal"),

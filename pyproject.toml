@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "Strelix-Core"
-version = "0.0.4"
+version = "0.0.5"
 description = "github.com/Strelix/core"
 authors = ["TreyWW"]
 readme = "README.md"
@@ -13,7 +13,7 @@ packages = [
 
 [project]
 name = "strelix-core"
-version = "0.0.4"
+version = "0.0.5"
 description = "Strelix Core"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -126,7 +126,7 @@ build-backend = "setuptools.build_meta"
 "billing" = ["templates/**/*", "static/**/*"]
 
 [tool.bumpversion]
-current_version = "0.0.4"
+current_version = "0.0.5"
 commit = true
 commit_args = "-s"
 tag = true

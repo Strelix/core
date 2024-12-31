@@ -7,6 +7,7 @@ from rest_framework.decorators import api_view, permission_classes
 
 from core.api.public.permissions import IsSuperuser
 from core.api.public.helpers.response import APIResponse
+from core.api.public.swagger_ui import API_RESPONSE_BASE
 
 
 @swagger_auto_schema(
@@ -17,19 +18,21 @@ from core.api.public.helpers.response import APIResponse
             description="System health check result",
             schema=openapi.Schema(
                 type=openapi.TYPE_OBJECT,
-                properties={
-                    "problems": openapi.Schema(
-                        type=openapi.TYPE_ARRAY,
-                        items=openapi.Schema(
-                            type=openapi.TYPE_OBJECT,
-                            properties={
-                                "id": openapi.Schema(type=openapi.TYPE_STRING, description="Problem ID"),
-                                "message": openapi.Schema(type=openapi.TYPE_STRING, description="Problem message"),
-                            },
+                properties=API_RESPONSE_BASE(
+                    {
+                        "problems": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "id": openapi.Schema(type=openapi.TYPE_STRING, description="Problem ID"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING, description="Problem message"),
+                                },
+                            ),
                         ),
-                    ),
-                    "healthy": openapi.Schema(type=openapi.TYPE_BOOLEAN, description="Indicates overall system health"),
-                },
+                        "healthy": openapi.Schema(type=openapi.TYPE_BOOLEAN, description="Indicates overall system health"),
+                    }
+                ),
             ),
             examples={
                 "application/json": {
@@ -60,4 +63,4 @@ def system_health_endpoint(request):
     except ConnectionError:
         problems.append({"id": "redis", "message": "redis failed to connect"})
 
-    return APIResponse({"problems": problems, "healthy": not bool(problems)})
+    return APIResponse(True, {"problems": problems, "healthy": not bool(problems)})

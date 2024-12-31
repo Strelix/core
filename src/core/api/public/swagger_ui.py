@@ -40,3 +40,13 @@ def get_swagger_endpoints(debug):
 TEAM_PARAMETER = openapi.Parameter(
     "team_id", openapi.IN_QUERY, description="id of the team you want to do this action under", type=openapi.TYPE_STRING, required=False
 )
+
+API_RESPONSE_BASE = lambda resp: {
+    "meta": openapi.Schema(
+        type=openapi.TYPE_OBJECT,
+        properties={
+            "success": openapi.Schema(type=openapi.TYPE_BOOLEAN, description="Request served successfully"),
+        },
+    ),
+    "data": openapi.Schema(type=openapi.TYPE_OBJECT, properties=resp),
+}

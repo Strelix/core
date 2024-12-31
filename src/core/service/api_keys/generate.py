@@ -25,8 +25,9 @@ def generate_public_api_key(
     if api_key_exists_under_name(owner, api_key_name):
         return None, "A key with this name already exists in your account"
 
-    if validate_scopes(permissions).failed:  # or not has_permission_to_create(request, owner):
-        return None, "Invalid permissions"
+    if err_validate_scopes := validate_scopes(permissions):  # or not has_permission_to_create(request, owner):
+        if err_validate_scopes.failed:
+            return None, err_validate_scopes.error
 
     administrator_service_type = None
 

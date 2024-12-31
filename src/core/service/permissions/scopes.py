@@ -17,7 +17,7 @@ def get_permissions_from_request(request: WebRequest) -> list:
     scopes.extend(
         f"{group}:read"
         for group, items in SCOPE_DESCRIPTIONS.items()
-        if request.POST.get(f"permission_{group}") == "write" and f"{group}:read" in SCOPE_DESCRIPTIONS
+        if request.POST.get(f"permission_{group}") == "write" and f"{group}:read" in SCOPES
     )
 
     return scopes

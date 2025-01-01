@@ -50,4 +50,4 @@ def get_dropdown(request: HtmxHttpRequest):
     if not request.htmx:
         return HttpResponse("Invalid Request", status=405)
 
-    return render(request, "base/topbar/_organizations_list.html")
+    return render(request, "core/base/topbar/_organizations_list.html")

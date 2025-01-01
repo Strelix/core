@@ -16,11 +16,11 @@ def create_user_endpoint(request: WebRequest):
 
     if not team:
         messages.error(request, "This team does not exist")
-        return render(request, "base/toast.html")
+        return render(request, "core/base/toast.html")
 
     if not team.is_owner(request.user):
         messages.error(request, "Only the team owner can create users")
-        return render(request, "base/toast.html")
+        return render(request, "core/base/toast.html")
 
     first_name = request.POST.get("first_name", "")
     last_name = request.POST.get("last_name", "")
@@ -31,7 +31,7 @@ def create_user_endpoint(request: WebRequest):
 
     if created_user.failed:
         messages.error(request, created_user.error)
-        return render(request, "base/toast.html")
+        return render(request, "core/base/toast.html")
     else:
         messages.success(request, f"The account for {first_name} was created successfully. They have been emailed instructions.")
-    return render(request, "base/toast.html")
+    return render(request, "core/base/toast.html")

@@ -29,11 +29,11 @@ def change_plan_endpoint(request: WebRequest):
 
     if not plan:
         messages.error(request, "Invalid plan")
-        return render(request, "base/toast.html")
+        return render(request, "core/base/toast.html")
     elif plan.price_per_month == -1 or plan.name.lower() == "enterprise":
         print("THIS PLAN IS ENTERPRISE, currently not implemented")
         messages.error(request, "Invalid plan (not yet implemented)")
-        return render(request, "base/toast.html")
+        return render(request, "core/base/toast.html")
 
     users_plans: QuerySet[UserSubscription] = UserSubscription.filter_by_owner(request.actor)
 
@@ -49,7 +49,7 @@ def change_plan_endpoint(request: WebRequest):
             </a>
         """,
         )
-        return render(request, "base/toast.html", {"autohide": False})
+        return render(request, "core/base/toast.html", {"autohide": False})
 
     users_active_plans: QuerySet[UserSubscription] = users_plans.filter(end_date__isnull=True)
     # if users_active_plans.exists():

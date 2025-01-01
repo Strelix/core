@@ -22,7 +22,7 @@ def has_entitlements_called_from_backend_handler(entitlements: list[str] | str, 
                 messages.warning(request, f"Your plan unfortunately doesn't include this feature.")
 
                 if htmx_api:
-                    return render(request, "base/toast.html", {"autohide": False})
+                    return render(request, "core/base/toast.html", {"autohide": False})
                 elif request.htmx:
                     return HttpResponseRedirect(reverse("billing:dashboard"))
                 return redirect("billing:dashboard")

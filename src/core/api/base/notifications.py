@@ -31,7 +31,7 @@ def delete_notification(request: HtmxHttpRequest, id: int):
     if notif is None or notif.user != request.user:
         if request.htmx:
             messages.error(request, "Notification not found")
-            return render(request, "base/toasts.html")
+            return render(request, "core/base/toasts.html")
         return HttpResponse(status=404, content="Notification not found")
 
     notif.delete()

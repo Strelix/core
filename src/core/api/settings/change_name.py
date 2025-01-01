@@ -11,7 +11,7 @@ def change_account_name(request: HtmxHttpRequest):
     if not request.htmx:
         return HttpResponse("Invalid Request", status=405)
 
-    htmx_return = "base/toasts.html"
+    htmx_return = "core/base/toasts.html"
 
     first_name = request.POST.get("first_name")
     last_name = request.POST.get("last_name")

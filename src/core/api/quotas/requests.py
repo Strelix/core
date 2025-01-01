@@ -52,7 +52,7 @@ def submit_request(request: HtmxHttpRequest, slug) -> HttpResponse:
     QuotaUsage.create_str(request.user, "quota_increase-requests_per_month_per_quota", quota_limit.id)
 
     messages.success(request, "Successfully submitted a quota increase request")
-    return render(request, "base/toast.html")
+    return render(request, "core/base/toast.html")
 
 
 @dataclass

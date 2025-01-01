@@ -1,3 +1,4 @@
+import os
 from typing import Dict, List
 
 from django.conf import settings
@@ -49,9 +50,10 @@ class CoreConfig:
     def _setup(self):
         from django.conf import settings
 
-        user_options = {option[5:]: getattr(settings, option) for option in dir(settings) if option.startswith("CORE_")}
+        django_settings_options = {option[5:]: getattr(settings, option) for option in dir(settings) if option.startswith("CORE_")}
+        environ_options = {key: value for key, value in os.environ.items() if key.startswith("CORE_")}
 
-        for key, value in user_options.items():
+        for key, value in {**django_settings_options, **environ_options}.items():
             if hasattr(self, key):
                 setattr(self, key, value)
 

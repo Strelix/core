@@ -420,6 +420,19 @@ class Client(OwnerBase):
             return self.user == user
 
 
+class DefaultValuesBase(OwnerBase):
+    currency = models.CharField(
+        max_length=3,
+        default="GBP",
+        choices=[(code, info["name"]) for code, info in UserSettings.CURRENCIES.items()],
+    )
+
+    client = models.OneToOneField(Client, on_delete=models.CASCADE, related_name="default_values", null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+
 class Notification(models.Model):
     action_choices = [
         ("normal", "Normal"),

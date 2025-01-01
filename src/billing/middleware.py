@@ -45,6 +45,6 @@ class CheckUserSubScriptionMiddleware:
             )
 
             if request.htmx:
-                return render(request, "base/toast.html", {"autohide": False})
+                return render(request, "core/base/toast.html", {"autohide": False})
             return redirect("billing:dashboard")
         return self.get_response(request)

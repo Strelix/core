@@ -20,7 +20,7 @@ def edit_user_permissions_endpoint(request: WebRequest) -> HttpResponse:
 
     if not receiver:
         messages.error(request, "Invalid user")
-        return render(request, "base/toast.html")
+        return render(request, "core/base/toast.html")
 
     edit_response = edit_member_permissions(receiver, request.user.logged_in_as_team, permissions)
 
@@ -28,4 +28,4 @@ def edit_user_permissions_endpoint(request: WebRequest) -> HttpResponse:
         messages.success(request, "User permissions saved successfully")
     else:
         messages.error(request, edit_response.error)
-    return render(request, "base/toast.html")
+    return render(request, "core/base/toast.html")

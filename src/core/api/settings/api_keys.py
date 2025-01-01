@@ -37,7 +37,7 @@ def generate_api_key_endpoint(request: WebRequest) -> HttpResponse:
 
     if not key_obj:
         messages.error(request, key_response)
-        return render(request, "base/toast.html")
+        return render(request, "core/base/toast.html")
 
     messages.success(request, "API key generated successfully")
 
@@ -66,4 +66,4 @@ def revoke_api_key_endpoint(request: WebRequest, key_id: str) -> HttpResponse:
         messages.error(request, "This key does not exist")
     else:
         messages.success(request, "Successfully revoked the API Key")
-    return render(request, "base/toast.html")
+    return render(request, "core/base/toast.html")

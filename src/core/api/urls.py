@@ -4,7 +4,7 @@ from django.urls import include
 from django.urls import path
 
 urlpatterns = [
-    path("base/", include("core.api.base.urls")),
+    path("core/base/", include("core.api.base.urls")),
     path("teams/", include("core.api.teams.urls")),
     path("settings/", include("core.api.settings.urls")),
     path("quotas/", include("core.api.quotas.urls")),

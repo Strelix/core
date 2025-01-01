@@ -100,7 +100,7 @@ def render_error_toast_message(request: HttpRequest, message: str) -> HttpRespon
 
 
 def render_toast_message(request: HttpRequest) -> HttpResponse:
-    return render(request, "base/toasts.html")  # htmx will handle the toast
+    return render(request, "core/base/toasts.html")  # htmx will handle the toast
 
 
 class MagicLinkRequestView(View):
@@ -187,7 +187,7 @@ class MagicLinkVerifyView(View):
 
         # user = magic_link.user
         # magic_link.delete()
-        # user.backend = "backend.auth_backends.EmailInsteadOfUsernameBackend"
+        # user.backend = "core.auth_backends.EmailInsteadOfUsernameBackend"
         # login(request, magic_link.user)
 
         return render(request, "core/auth/magic_link_verify.html", {"uuid": uuid, "token": token})
@@ -233,7 +233,7 @@ class MagicLinkVerifyAccept(View):
             user = magic_link.user
             magic_link.delete()
 
-            user.backend = "backend.auth_backends.EmailInsteadOfUsernameBackend"  # type: ignore[attr-defined]
+            user.backend = "core.auth_backends.EmailInsteadOfUsernameBackend"  # type: ignore[attr-defined]
             LoginLog.objects.create(user=user, service=LoginLog.ServiceTypes.MAGIC_LINK)
             AuditLog.objects.create(user=user, action="magic link accepted")
             login(request, magic_link.user)
